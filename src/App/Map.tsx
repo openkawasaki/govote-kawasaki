@@ -83,19 +83,38 @@ const Content = (props: Props) => {
 
       mapObject.addLayer({
         id: 'shop-points',
-        type: 'circle',
+        type: 'symbol',
         source: 'shops',
-        filter: ['all',
-          ['==', '$type', 'Point'],
-        ],
-        paint: {
-          'circle-radius': 13,
-          'circle-color': '#FF0000',
-          'circle-opacity': 0.4,
-          'circle-stroke-width': 2,
-          'circle-stroke-color': '#FFFFFF',
-          'circle-stroke-opacity': 1,
-        },
+        filter: ['==', "カテゴリ", "センキョ割実施店舗"],
+        layout: {
+          'icon-image': 'commercial',
+          'icon-overlap': 'always',
+          'icon-size': 1.5
+        }
+      })
+
+      mapObject.addLayer({
+        id: 'voting-points',
+        type: 'symbol',
+        source: 'shops',
+        filter: ['==', "カテゴリ", "期日前投票所"],
+        layout: {
+          'icon-image': 'town_hall',
+          'icon-overlap': 'always',
+          'icon-size': 1.5
+        }
+      })
+
+      mapObject.addLayer({
+        id: 'poster-points',
+        type: 'symbol',
+        source: 'shops',
+        filter: ['==', "カテゴリ", "ポスター掲示場設置場所"],
+        layout: {
+          'icon-image': 'monument',
+          'icon-overlap': 'always',
+          'icon-size': 1.5
+        }
       })
 
       mapObject.addLayer({
@@ -123,19 +142,12 @@ const Content = (props: Props) => {
         },
       })
 
+      // shop-points
       mapObject.on('mouseenter', 'shop-points', () => {
         mapObject.getCanvas().style.cursor = 'pointer'
       })
 
       mapObject.on('mouseleave', 'shop-points', () => {
-        mapObject.getCanvas().style.cursor = ''
-      })
-
-      mapObject.on('mouseenter', 'shop-symbol', () => {
-        mapObject.getCanvas().style.cursor = 'pointer'
-      })
-
-      mapObject.on('mouseleave', 'shop-symbol', () => {
         mapObject.getCanvas().style.cursor = ''
       })
 
@@ -145,6 +157,45 @@ const Content = (props: Props) => {
         }
       })
 
+      // voting-points
+      mapObject.on('mouseenter', 'voting-points', () => {
+        mapObject.getCanvas().style.cursor = 'pointer'
+      })
+
+      mapObject.on('mouseleave', 'voting-points', () => {
+        mapObject.getCanvas().style.cursor = ''
+      })
+
+      mapObject.on('click', 'voting-points', (event: any) => {
+        if (!event.features[0].properties.cluster) {
+          setShop(event.features[0].properties)
+        }
+      })
+
+      // poster-points
+      mapObject.on('mouseenter', 'poster-points', () => {
+        mapObject.getCanvas().style.cursor = 'pointer'
+      })
+
+      mapObject.on('mouseleave', 'poster-points', () => {
+        mapObject.getCanvas().style.cursor = ''
+      })
+
+      mapObject.on('click', 'poster-points', (event: any) => {
+        if (!event.features[0].properties.cluster) {
+          setShop(event.features[0].properties)
+        }
+      })
+
+      // shop-symbol
+      mapObject.on('mouseenter', 'shop-symbol', () => {
+        mapObject.getCanvas().style.cursor = 'pointer'
+      })
+
+      mapObject.on('mouseleave', 'shop-symbol', () => {
+        mapObject.getCanvas().style.cursor = ''
+      })
+
       mapObject.on('click', 'shop-symbol', (event: any) => {
         if (!event.features[0].properties.cluster) {
           setShop(event.features[0].properties)
@@ -152,7 +203,6 @@ const Content = (props: Props) => {
       })
 
       setCluster(mapObject)
-
 
     });
 
