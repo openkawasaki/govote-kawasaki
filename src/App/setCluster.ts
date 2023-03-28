@@ -3,10 +3,12 @@ const setCluster = (map: any) => {
     id: 'clusters',
     type: 'circle',
     source: 'shops',
-    filter: ['has', 'point_count'],
+    filter: ['any',
+      ['has', 'point_count'],
+    ],
     paint: {
       'circle-radius': 20,
-      'circle-color': '#FF0000',
+      'circle-color': '#6F8E61',
       'circle-opacity': 1.0,
     },
   })
@@ -15,12 +17,14 @@ const setCluster = (map: any) => {
     id: 'cluster-count',
     type: 'symbol',
     source: 'shops',
-    filter: ['has', 'point_count'],
+    filter: ['any',
+      ['has', 'point_count'],
+    ],
     paint: {
       'text-color': '#FFFFFF',
     },
     layout: {
-      'text-field': '{point_count_abbreviated} 件',
+      'text-field': '{point_count_abbreviated}',
       'text-size': 12,
       'text-font': ['Noto Sans Regular'],
     },
