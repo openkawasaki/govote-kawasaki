@@ -81,8 +81,6 @@ const Content = (props: Props) => {
         clusterRadius: 25,
       })
 
-      let filterGroup: any = document.getElementById('filter-group');
-
       geojson.features.forEach(function (feature: any) {
         let category:string = feature.properties['カテゴリ'];
         console.log(category)
