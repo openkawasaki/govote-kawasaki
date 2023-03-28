@@ -71,7 +71,7 @@ const Content = (props: Props) => {
       const textColor = '#000000'
       const textHaloColor = '#FFFFFF'
 
-      const geojson = toGeoJson(data)
+      const geojson: any = toGeoJson(data)
 
       mapObject.addSource('shops', {
         type: 'geojson',
@@ -81,22 +81,58 @@ const Content = (props: Props) => {
         clusterRadius: 25,
       })
 
-      mapObject.addLayer({
-        id: 'shop-points',
-        type: 'circle',
-        source: 'shops',
-        filter: ['all',
-          ['==', '$type', 'Point'],
-        ],
-        paint: {
-          'circle-radius': 13,
-          'circle-color': '#FF0000',
-          'circle-opacity': 0.4,
-          'circle-stroke-width': 2,
-          'circle-stroke-color': '#FFFFFF',
-          'circle-stroke-opacity': 1,
-        },
-      })
+      let filterGroup: any = document.getElementById('filter-group');
+
+      geojson.features.forEach(function (feature: any) {
+        let category:string = feature.properties['カテゴリ'];
+        console.log(category)
+        let layer_id: string = "";
+        let symbol: string = 'commercial';
+        if (category === "センキョ割実施店舗") {
+          layer_id = 'poi-shop';
+          symbol = 'commercial';
+        } else if (category === "期日前投票所") {
+          layer_id = 'poi-early-voting-station';
+          symbol = 'town_hall';
+        } else if (category === "投票所") {
+          layer_id = 'poi-voting-station';
+          symbol = 'monument';
+        } else if (category === "ポスター掲示場設置場所") {
+          layer_id = 'poi-poster-location';
+          symbol = 'amusement_park';
+        } else {
+          layer_id = "";
+          symbol = "";
+        }
+        // Add a layer for this symbol type if it hasn't been added already.
+        if (!mapObject.getLayer(layer_id)) {
+          mapObject.addLayer({
+            'id': layer_id,
+            'type': 'symbol',
+            source: 'shops',
+            filter: ['==', "カテゴリ", category],
+            'layout': {
+              'icon-image': symbol,
+              'icon-overlap': 'always',
+              'icon-size': 1.7
+            },
+          });
+
+          mapObject.on('mouseenter', layer_id, () => {
+            mapObject.getCanvas().style.cursor = 'pointer'
+          })
+    
+          mapObject.on('mouseleave', layer_id, () => {
+            mapObject.getCanvas().style.cursor = ''
+          })
+    
+          mapObject.on('click', layer_id, (event: any) => {
+            if (!event.features[0].properties.cluster) {
+              setShop(event.features[0].properties)
+            }
+          })    
+        }
+      });
 
       mapObject.addLayer({
         id: 'shop-symbol',
@@ -123,26 +159,13 @@ const Content = (props: Props) => {
         },
       })
 
-      mapObject.on('mouseenter', 'shop-points', () => {
-        mapObject.getCanvas().style.cursor = 'pointer'
-      })
-
-      mapObject.on('mouseleave', 'shop-points', () => {
-        mapObject.getCanvas().style.cursor = ''
-      })
-
+      // shop-symbol
       mapObject.on('mouseenter', 'shop-symbol', () => {
         mapObject.getCanvas().style.cursor = 'pointer'
       })
 
       mapObject.on('mouseleave', 'shop-symbol', () => {
         mapObject.getCanvas().style.cursor = ''
-      })
-
-      mapObject.on('click', 'shop-points', (event: any) => {
-        if (!event.features[0].properties.cluster) {
-          setShop(event.features[0].properties)
-        }
       })
 
       mapObject.on('click', 'shop-symbol', (event: any) => {
@@ -152,7 +175,6 @@ const Content = (props: Props) => {
       })
 
       setCluster(mapObject)
-
 
     });
 
