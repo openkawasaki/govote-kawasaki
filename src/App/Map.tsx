@@ -153,6 +153,7 @@ const Content = (props: Props) => {
           })
 
           // Add checkbox and label elements for the layer.
+          /*
           var input = document.createElement('input');
           input.type = 'checkbox';
           input.id = layer_id;
@@ -172,7 +173,7 @@ const Content = (props: Props) => {
               e.target.checked ? 'visible' : 'none'
             );
           });
-
+          */
         }
       });
 
