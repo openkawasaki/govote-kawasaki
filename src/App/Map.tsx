@@ -5,6 +5,8 @@ import toGeoJson from './toGeoJson'
 import setCluster from './setCluster'
 import Shop from './Shop'
 
+import './Map.scss'
+
 type Props = {
   data: Pwamap.ShopData[];
 };
@@ -14,6 +16,17 @@ const CSS: React.CSSProperties = {
   height: '100%',
   position: 'relative',
 }
+
+/*
+Create and style clusters
+https://maplibre.org/maplibre-gl-js-docs/example/cluster/
+
+Filter symbols by toggling a list
+https://maplibre.org/maplibre-gl-js-docs/example/filter-markers/
+
+マーカーのアイコン一覧
+https://docs.geolonia.com/geojson/marker-symbol/
+*/
 
 const hidePoiLayers = (map: any) => {
 
@@ -81,26 +94,35 @@ const Content = (props: Props) => {
         clusterRadius: 25,
       })
 
+      let filterGroup: any = document.getElementById('filter-group');
+
       geojson.features.forEach(function (feature: any) {
         let category:string = feature.properties['カテゴリ'];
-        console.log(category)
+
         let layer_id: string = "";
         let symbol: string = 'commercial';
+        let title: string = "";
+
         if (category === "センキョ割実施店舗") {
           layer_id = 'poi-shop';
           symbol = 'commercial';
+          title = "センキョ割実施店舗";
         } else if (category === "期日前投票所") {
           layer_id = 'poi-early-voting-station';
           symbol = 'town_hall';
+          title = "期日前投票所";
         } else if (category === "投票所") {
           layer_id = 'poi-voting-station';
           symbol = 'monument';
+          title = "投票所";
         } else if (category === "ポスター掲示場設置場所") {
           layer_id = 'poi-poster-location';
           symbol = 'amusement_park';
+          title = "ポスター掲示場設置場所";
         } else {
           layer_id = "";
           symbol = "";
+          title = "";
         }
         // Add a layer for this symbol type if it hasn't been added already.
         if (!mapObject.getLayer(layer_id)) {
@@ -119,16 +141,39 @@ const Content = (props: Props) => {
           mapObject.on('mouseenter', layer_id, () => {
             mapObject.getCanvas().style.cursor = 'pointer'
           })
-    
+
           mapObject.on('mouseleave', layer_id, () => {
             mapObject.getCanvas().style.cursor = ''
           })
-    
+
           mapObject.on('click', layer_id, (event: any) => {
             if (!event.features[0].properties.cluster) {
               setShop(event.features[0].properties)
             }
-          })    
+          })
+
+          // Add checkbox and label elements for the layer.
+          /*
+          var input = document.createElement('input');
+          input.type = 'checkbox';
+          input.id = layer_id;
+          input.checked = true;
+          filterGroup.appendChild(input);
+
+          var label = document.createElement('label');
+          label.setAttribute('for', layer_id);
+          label.textContent = title;
+          filterGroup.appendChild(label);
+
+          // When the checkbox changes, update the visibility of the layer.
+          input.addEventListener('change', function (e: any) {
+            mapObject.setLayoutProperty(
+              layer_id,
+              'visibility',
+              e.target.checked ? 'visible' : 'none'
+            );
+          });
+          */
         }
       });
 
