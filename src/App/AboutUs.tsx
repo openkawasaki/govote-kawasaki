@@ -6,7 +6,7 @@ const Content = () => {
       <div className="container">
         <div className="branding">
           <div className="image"><img src={`${process.env.PUBLIC_URL}/assets/logo.png`} alt=""/></div>
-          <div className="logo">GoVote KAWASAKIマップ</div>
+          <div className="logo">GoVote KAWASAKIマップアプリ</div>
         </div>
 
         <h2>さそいあって選挙にいこう！</h2>

@@ -9,7 +9,6 @@ const Content = (props: Props) => {
   return (
     <>
       <Map data={props.data} />
-      <nav id="filter-group" className="filter-group"></nav>
     </>
   );
 };
