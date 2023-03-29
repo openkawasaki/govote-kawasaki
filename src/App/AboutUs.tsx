@@ -7,7 +7,7 @@ const Content = () => {
       <div className="container">
         <div className="branding">
           <div className="image"><img src={`${process.env.PUBLIC_URL}/assets/logo.png`} alt=""/></div>
-          <div className="logo">GoVote KAWASAKIマップアプリ</div>
+          <div className="logo">GoVote KAWASAKIアプリ</div>
         </div>
 
         <h2>さそいあって選挙にいこう！</h2>
@@ -61,11 +61,12 @@ const Content = () => {
 
         <h4>About Geolonia PWAマップ</h4>
         <p>
-          このアプリは、株式会社Geoloniaの「<a href="https://github.com/geoloniamaps/pwamap" target='_blank' rel="noreferrer">Geolonia PWAマップ</a>」を使用して作成されています。
+          このアプリは、株式会社Geoloniaの「<a href="https://github.com/geoloniamaps/pwamap" target='_blank' rel="noreferrer">Geolonia PWAマップ</a>」のソースコードを元に作成されています。
         </p>
 
-      </div>
+        <h5>powered by オープン川崎</h5>
 
+      </div>
     </div>
   );
 };

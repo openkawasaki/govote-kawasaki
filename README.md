@@ -1,7 +1,7 @@
-# GoVote KAWASAKIマップアプリ
-
-## GoVote KAWASAKIマップアプリ について
-GoVote KAWASAKIマップアプリは、川崎市内のポスター掲示場設置場所、投票所、期日前投票所、センキョ割実施店舗を確認できるアプリです
+GoVote KAWASAKIアプリ
+===
+GoVote KAWASAKIアプリは、川崎市内のポスター掲示場設置場所、投票所、期日前投票所、センキョ割実施店舗を
+確認できるアプリです
 
 詳細については[公式サイト](https://www.govote-kawasaki.jp/)を参照ください。
 
@@ -24,7 +24,7 @@ GoVote KAWASAKIマップアプリは、川崎市内のポスター掲示場設�
 * 地域課題解決と新たな事業創造を行う
 
 ### Contributors
-GoVote KAWASAKIマップアプリは、下記のメンバーで開発されています
+GoVote KAWASAKIアプリは、下記のメンバーで開発されています
 
 | GitHub                              | Twitter                                |
 |-------------------------------------|----------------------------------------|
