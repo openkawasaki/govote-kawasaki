@@ -5,6 +5,21 @@ import toGeoJson from './toGeoJson'
 import setCluster from './setCluster'
 import Shop from './Shop'
 
+// Maker Icon images
+import svg_bbs from './assets/iconmap-bbs.svg'
+import svg_senkyowari_yen from './assets/iconmap-senkyowari-yen.svg'
+import svg_vote from './assets/iconmap-vote.svg'
+import svg_votebeforehand from './assets/iconmap-votebeforehand.svg'
+const maker_size = 48;
+const marker_bbs = new Image(maker_size, maker_size);
+const marker_senkyowari_yen = new Image(maker_size, maker_size);
+const marker_vote = new Image(maker_size, maker_size);
+const marker_votebeforehand = new Image(maker_size, maker_size);
+marker_bbs.src = svg_bbs;
+marker_senkyowari_yen.src = svg_senkyowari_yen;
+marker_vote.src = svg_vote;
+marker_votebeforehand.src = svg_votebeforehand;
+
 type Props = {
   data: Pwamap.ShopData[];
 };
@@ -14,17 +29,6 @@ const CSS: React.CSSProperties = {
   height: '100%',
   position: 'relative',
 }
-
-/*
-Create and style clusters
-https://maplibre.org/maplibre-gl-js-docs/example/cluster/
-
-Filter symbols by toggling a list
-https://maplibre.org/maplibre-gl-js-docs/example/filter-markers/
-
-マーカーのアイコン一覧
-https://docs.geolonia.com/geojson/marker-symbol/
-*/
 
 const hidePoiLayers = (map: any) => {
 
@@ -82,6 +86,7 @@ const Content = (props: Props) => {
       const textColor = '#000000'
       const textHaloColor = '#FFFFFF'
 
+
       const geojson: any = toGeoJson(data)
 
       mapObject.addSource('shops', {
@@ -96,35 +101,40 @@ const Content = (props: Props) => {
         let category:string = feature.properties['カテゴリ'];
 
         let layer_id: string = "";
-        let symbol: string = 'commercial';
+        let marker_object: any = null;
 
         if (category === "センキョ割実施店舗") {
-          layer_id = 'poi-shop';
-          symbol = 'commercial';
+          layer_id = 'poi-senkyowari_yen';
+          marker_object = marker_senkyowari_yen;
         } else if (category === "期日前投票所") {
-          layer_id = 'poi-early-voting-station';
-          symbol = 'town_hall';
+          layer_id = 'poi-votebeforehand';
+          marker_object = marker_votebeforehand
         } else if (category === "投票所") {
-          layer_id = 'poi-voting-station';
-          symbol = 'monument';
+          layer_id = 'poi-vote';
+          marker_object = marker_vote;
         } else if (category === "ポスター掲示場設置場所") {
-          layer_id = 'poi-poster-location';
-          symbol = 'amusement_park';
+          layer_id = 'poi-bbs';
+          marker_object = marker_bbs;
         } else {
           layer_id = "";
-          symbol = "";
+          marker_object = null;
         }
         // Add a layer for this symbol type if it hasn't been added already.
         if (!mapObject.getLayer(layer_id)) {
+          // アイコン画像設定
+          let image_id: string = "img_" + layer_id;
+          mapObject.addImage(image_id, marker_object);
+
+          // スタイル設定
           mapObject.addLayer({
             'id': layer_id,
             'type': 'symbol',
             source: 'shops',
             filter: ['==', "カテゴリ", category],
             'layout': {
-              'icon-image': symbol,
-              'icon-overlap': 'always',
-              'icon-size': 1.7
+              'icon-image': image_id,
+              "icon-allow-overlap": true,
+              "icon-size": 1.0
             },
           });
 
