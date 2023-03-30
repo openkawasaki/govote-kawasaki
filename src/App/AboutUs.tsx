@@ -40,10 +40,27 @@ const Content = () => {
         <h4>関連サイト</h4>
         <p>
           <ul style={{ listStyleType: "none" }}>
-            <li><a href="https://www.govote-kawasaki.jp/" target='_blank' rel="noreferrer">公式サイト</a></li>
-            <li><a href="https://twitter.com/kawasaki_vote" target='_blank' rel="noreferrer">Twitter</a></li>
-            <li><a href="https://www.facebook.com/govote.kawasaki" target='_blank' rel="noreferrer">Facebook</a></li>
-            <li><a href="https://www.instagram.com/govote.kawasaki/?hl=ja" target='_blank' rel="noreferrer">Instagram</a></li>
+            <li><a href="https://www.govote-kawasaki.jp/" target='_blank' rel="noreferrer">・公式サイト</a></li>
+            <li><a href="https://twitter.com/kawasaki_vote" target='_blank' rel="noreferrer">・Twitter</a></li>
+            <li><a href="https://www.facebook.com/govote.kawasaki" target='_blank' rel="noreferrer">・Facebook</a></li>
+            <li><a href="https://www.instagram.com/govote.kawasaki/?hl=ja" target='_blank' rel="noreferrer">・Instagram</a></li>
+          </ul>
+        </p>
+        <h4>選挙情報</h4>
+        <p>
+          令和5年4月9日執行第20回統一地方選挙<br/>
+          投票日：令和5年4月9日(日) 朝7時～夜8時<br/>
+          <ul style={{ listStyleType: "none" }}>
+            <li>・川崎市議会議員選挙</li>
+            <li>・神奈川県議会議員選挙</li>
+            <li>・神奈川県知事選挙</li>
+          </ul>
+        </p>
+        <h4>外部リンク</h4>
+        <p>
+          <ul style={{ listStyleType: "none" }}>
+            <li><a href="https://senkyo-kawasaki2023.jp/index.htm" target='_blank' rel="noreferrer">・令和5年4月9日執行第20回統一地方選挙特設ホームページ</a></li>
+            <li><a href="https://www.city.kawasaki.jp/shisei/category/58-1-0-0-0-0-0-0-0-0.html" target='_blank' rel="noreferrer">・川崎市の選挙情報</a></li>
           </ul>
         </p>
 
