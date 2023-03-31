@@ -22,7 +22,7 @@ GitHub Actionsで10分毎のスケジュールでGoogleスプレットシート�
 リポジトリが60日間使用されないと、GitHub Actions は自動的に無効になります。
 
 ### 開発環境作成
-モジュールは[package.json](https://raw.githubusercontent.com/openkawasaki/govote-kawasaki/master/package.json)を参照ください
+モジュールは [package.json](https://raw.githubusercontent.com/openkawasaki/govote-kawasaki/master/package.json) を参照ください
 ```
 $ git clone git@github.com:openkawasaki/govote-kawasaki.git
 $ cd govote-kawasaki
@@ -35,13 +35,13 @@ $ npm start
 * GOOGLE_SHEET_URL: Googleスプレットシート URL
 
 ### License
-MIT See the[license](./LICENSE.txt) document for the full text.
+MIT License: See the [license](./LICENSE.txt) document for the full text.
 
 各々のライセンスに従ってください。
 * [Geolonia PWAマップ](https://github.com/geoloniamaps/pwamap)
 
 ### Contributors
-[CONTRIBUTORS.md](./CONTRIBUTORS.md)を参照ください
+[CONTRIBUTORS.md](./CONTRIBUTORS.md) を参照ください
 
 ---
 
