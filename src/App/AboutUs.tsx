@@ -88,9 +88,15 @@ const Content = () => {
           </p>
         </div>
 
-        <p>
-          <a href="https://raw.githubusercontent.com/openkawasaki/govote-kawasaki/master/LICENSE.txt" target='_blank' rel="noreferrer">ライセンス表示</a>
-        </p>
+        <div className="note_small" >
+          <h5>その他</h5>
+          <p>
+            <ul>
+              <li><a href="https://raw.githubusercontent.com/openkawasaki/govote-kawasaki/master/LICENSE.txt" target='_blank' rel="noreferrer">ライセンス表示</a></li>
+              <li><a href="https://raw.githubusercontent.com/openkawasaki/govote-kawasaki/master/google_analytics.txt" target='_blank' rel="noreferrer">Google Analyticsの利用について</a></li>
+            </ul>
+          </p>
+        </div>
 
         <div className="copyright">
           powered by オープン川崎
